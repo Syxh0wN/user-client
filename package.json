@@ -1,0 +1,26 @@
+{
+  "name": "user-client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Syxh0wN/Painel-User-node.js.git",
+  "author": "Syxh0wN <leonardobennr@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --ignore-watch node_modules ./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.5",
+    "nodemon": "^2.0.22",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.12"
+  }
+}
