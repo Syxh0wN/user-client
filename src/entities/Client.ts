@@ -6,6 +6,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { Address } from "./Address";
 import { User } from "./User";
 
 @Entity("clients")
@@ -25,4 +26,11 @@ export class Client {
     })
     @JoinColumn({ name: "user_id" })
     user: User;
+
+    @OneToOne(() => Address, (address) => address.client, {
+        cascade: true, // opcional, se você quiser salvar/alterar Address automaticamente quando salvar/alterar Client
+        eager: true, // opcional, se você quiser carregar Address automaticamente quando carregar Client
+    })
+    @JoinColumn()
+    address: Address;
 }

@@ -1,3 +1,4 @@
+import { getRounds, hashSync } from "bcryptjs";
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -5,9 +6,10 @@ import {
     OneToOne,
     CreateDateColumn,
     UpdateDateColumn,
+    BeforeInsert,
 } from "typeorm";
-import { Exclude } from "class-transformer";
 import { Client } from "./Client";
+import { Exclude } from "class-transformer";
 
 @Entity("users")
 export class User {
@@ -27,6 +29,9 @@ export class User {
     @Column({ type: "varchar", length: 20, nullable: true })
     phone: string;
 
+    @Column({ type: "boolean", default: false })
+    isAdmin: boolean;
+
     @CreateDateColumn()
     created_at: Date;
 
@@ -38,4 +43,12 @@ export class User {
         onDelete: "CASCADE",
     })
     client: Client;
+
+    @BeforeInsert()
+    hashPassword() {
+        const isEncrypted = getRounds(this.password);
+        if (!isEncrypted) {
+            this.password = hashSync(this.password, 10);
+        }
+    }
 }

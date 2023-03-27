@@ -1,14 +1,14 @@
-import express from 'express';
+import { app } from './app';
 import { AppDataSource } from './data-source';
 
-AppDataSource.initialize().then(() => {
-
-    const app = express();
-    app.use(express.json());
-
-    app.get('/', (req, res) => {
-        return res.send('Hello World!');
-    });
-
-    return app.listen(process.env.PORT);
-})
+(async () => {
+    try {
+        await AppDataSource.initialize();
+        console.log('DataBase connected!');
+        app.listen(process.env.PORT, () => {
+            console.log(`Servidor executando na porta ${process.env.PORT}`);
+        });
+    } catch (err) {
+        console.error('Error during Data Source initialization', err);
+    }
+})();
