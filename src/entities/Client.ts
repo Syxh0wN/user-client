@@ -28,8 +28,8 @@ export class Client {
     user: User;
 
     @OneToOne(() => Address, (address) => address.client, {
-        cascade: true, // opcional, se você quiser salvar/alterar Address automaticamente quando salvar/alterar Client
-        eager: true, // opcional, se você quiser carregar Address automaticamente quando carregar Client
+        cascade: true,
+        eager: true,
     })
     @JoinColumn()
     address: Address;

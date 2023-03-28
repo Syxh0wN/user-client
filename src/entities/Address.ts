@@ -38,14 +38,6 @@ export class Address {
     @Column({ type: "varchar", nullable: false })
     state: string;
 
-    @CreateDateColumn()
-    @Exclude()
-    created_at: Date;
-
-    @UpdateDateColumn()
-    @Exclude()
-    updated_at: Date;
-
     @OneToOne(() => Client, (client) => client.address)
     @JoinColumn()
     client: Client;
