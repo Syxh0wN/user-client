@@ -7,7 +7,7 @@ import { IUserDecode, IUserRequest } from "../../interfaces/user/interface";
 
 export const showUserService = async () => {
   const userRepository = AppDataSource.getRepository(User);
-  const user = await userRepository.find();
+  const user = await userRepository.find({ relations: ["client"] });
 
   const plainNewUser = instanceToPlain(user) as IUserRequest;
   return plainNewUser;
